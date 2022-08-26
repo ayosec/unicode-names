@@ -4,3 +4,11 @@ version = "0.1.0"
 edition = "2021"
 authors = [ "ayosec@gmail.com" ]
 license = "Apache-2.0"
+
+[dependencies]
+flate2 = { version = "1.0.24", features = ["zlib"], default-features = false }
+
+[build-dependencies]
+flate2 = { version = "1.0.24", default-features = false, features = ["zlib"] }
+twox-hash = { version = "1.6.3", default-features = false }
+ureq = "2.5.0"
