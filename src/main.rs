@@ -3,6 +3,7 @@
 //! Search Unicode characters using substrings against their names.
 
 use std::env;
+use std::io::{stdout, BufWriter, Write};
 
 mod charstable;
 
@@ -14,9 +15,14 @@ fn main() {
         return;
     }
 
+    let mut stdout = BufWriter::new(stdout());
+
     for (chr, name) in charstable::Table::new() {
         if patterns.iter().all(|pat| name.contains(pat)) {
-            println!(" {chr:}\tU+{:<6X} {name}", chr as u32);
+            let res = writeln!(&mut stdout, " {chr:}\tU+{:<6X} {name}", chr as u32);
+            if res.is_err() {
+                return;
+            }
         }
     }
 }
