@@ -15,5 +15,10 @@ flate2 = { version = "1.0.24", default-features = false, features = ["zlib"] }
 twox-hash = { version = "1.6.3", default-features = false }
 ureq = "2.5.0"
 
+[profile.release]
+panic = "abort"
+strip = "debuginfo"
+lto = true
+
 [package.metadata.deb]
 extended-description = "-"
