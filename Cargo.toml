@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2021"
 authors = [ "ayosec@gmail.com" ]
 license = "Apache-2.0"
+description = "CLI tool to search Unicode characters by their names."
+readme = "README.md"
 
 [dependencies]
 flate2 = { version = "1.0.24", features = ["zlib"], default-features = false }
@@ -12,3 +14,6 @@ flate2 = { version = "1.0.24", features = ["zlib"], default-features = false }
 flate2 = { version = "1.0.24", default-features = false, features = ["zlib"] }
 twox-hash = { version = "1.6.3", default-features = false }
 ureq = "2.5.0"
+
+[package.metadata.deb]
+extended-description = "-"
