@@ -11,7 +11,7 @@ use flate2::write::ZlibEncoder;
 use flate2::Compression;
 use twox_hash::XxHash64;
 
-const SOURCE_URL: &str = "https://unicode.org/Public/14.0.0/ucd/UnicodeData.txt";
+const SOURCE_URL: &str = "https://unicode.org/Public/15.0.0/ucd/UnicodeData.txt";
 
 fn main() {
     let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
