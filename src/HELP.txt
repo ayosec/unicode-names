@@ -3,7 +3,7 @@ Search Unicode characters.
 
 USAGE:
 
-  unicode-names [-r/--range RANGE] [PATTERN...]
+  unicode-names [-r|--range RANGE] [PATTERN...]
 
   PATTERN is one or more strings to be matched against the character name.
 

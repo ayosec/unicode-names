@@ -28,7 +28,13 @@ fn main() -> ExitCode {
 
     for (chr, name) in charstable::Table::new() {
         if filters.iter().all(|filter| filter.matches(chr, &name)) {
-            let res = writeln!(&mut stdout, " {chr:}\tU+{:<6X} {name}", chr as u32);
+            if chr.is_control() {
+                let _ = write!(&mut stdout, " \\x{:02X}", chr as u32);
+            } else {
+                let _ = write!(&mut stdout, " {chr:}");
+            }
+
+            let res = writeln!(&mut stdout, "\tU+{:<6X} {name}", chr as u32);
             if res.is_err() {
                 return ExitCode::from(2);
             }
