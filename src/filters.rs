@@ -11,7 +11,7 @@ pub enum Filter {
 impl Filter {
     pub fn matches(&self, chr: char, name: &str) -> bool {
         match self {
-            Filter::Name(n) => n.contains(name),
+            Filter::Name(n) => name.contains(n),
             Filter::Range(s, e) => (*s..=*e).contains(&chr),
         }
     }
