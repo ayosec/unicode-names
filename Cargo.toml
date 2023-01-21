@@ -9,6 +9,7 @@ readme = "README.md"
 
 [dependencies]
 flate2 = { version = "1.0.24", features = ["zlib"], default-features = false }
+lexopt = "0.3.0"
 
 [build-dependencies]
 flate2 = { version = "1.0.24", default-features = false, features = ["zlib"] }

@@ -2,27 +2,47 @@
 //!
 //! Search Unicode characters using substrings against their names.
 
-use std::env;
 use std::io::{stdout, BufWriter, Write};
+use std::process::ExitCode;
 
 mod charstable;
+mod filters;
 
-fn main() {
-    let patterns: Vec<_> = env::args().skip(1).map(|arg| arg.to_uppercase()).collect();
+const HELP: &str = include_str!("HELP.txt");
 
-    if patterns.is_empty() {
-        eprintln!("Usage: unicode-names [patterns]+");
-        return;
+fn main() -> ExitCode {
+    let filters = match filters::parse_args() {
+        Ok(f) => f,
+        Err(e) => {
+            eprintln!("{}", e);
+            return ExitCode::FAILURE;
+        }
+    };
+
+    if filters.is_empty() {
+        help();
+        return ExitCode::SUCCESS;
     }
 
     let mut stdout = BufWriter::new(stdout());
 
     for (chr, name) in charstable::Table::new() {
-        if patterns.iter().all(|pat| name.contains(pat)) {
+        if filters.iter().all(|filter| filter.matches(chr, &name)) {
             let res = writeln!(&mut stdout, " {chr:}\tU+{:<6X} {name}", chr as u32);
             if res.is_err() {
-                return;
+                return ExitCode::from(2);
             }
         }
     }
+
+    ExitCode::SUCCESS
+}
+
+fn help() {
+    println!(
+        "{} {}\n\n{}",
+        env!("CARGO_PKG_NAME"),
+        env!("CARGO_PKG_VERSION"),
+        HELP
+    );
 }

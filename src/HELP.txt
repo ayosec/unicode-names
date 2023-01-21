@@ -1,0 +1,24 @@
+Search Unicode characters.
+
+
+USAGE:
+
+  unicode-names [-r/--range RANGE] [PATTERN...]
+
+  PATTERN is one or more strings to be matched against the character name.
+
+  RANGE is matched against the numeric value of the character. It can be
+  either <start>-<end>, or <start>+<offset>. <start> and <end> are expected
+  as hexadecimal values, and <offset> as decimal.
+
+
+EXAMPLES:
+
+  $ unicode-names arrowhead left
+
+    Characters with both "arrowhead" and "left" in the name.
+
+  $ unicode-names -r 2200-2220
+  $ unicode-names -r 2200+32
+
+    In both cases, characters between U+2200 and U+2220.
